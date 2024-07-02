@@ -105,7 +105,7 @@ const Ytvid = () => {
                         onEnd={onVideoEnd}
                     />
                     <div className='checkbox'>
-                        <h1>My child is exhibiting behaviour as shown in the video</h1>
+                        <h4>My child is exhibiting behaviour as shown in the video</h4>
                         <div>
                             <input
                                 type="checkbox"

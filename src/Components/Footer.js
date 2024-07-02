@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 
 const Footer = () => {
@@ -9,10 +8,8 @@ const Footer = () => {
   }, []);
 
   return (
-    <div className="pt-lg-10 pt-5 footer bg-white text-black text-center">
-    
+    <div className="pt-lg-10 pt-5 footer bg-white text-black text-center" style={{ backgroundColor: "#ffe6fa" }}>
       <p>{`© ${year} KMIT. All Rights Reserved.`}</p>
-      
     </div>
   );
 };

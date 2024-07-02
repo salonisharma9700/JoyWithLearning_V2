@@ -33,7 +33,7 @@ const App = () => {
         <Route path="/upvid" element={<FormVidPin/>} />
         <Route path="/iconsfoot" element={<IconFooter />} />
       </Routes>
-      {location.pathname === '/' && <IconFooter />}
+      {/* {location.pathname === '/' && <IconFooter />} */}
       <Footer/>
     </div>
   );

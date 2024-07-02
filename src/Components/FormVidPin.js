@@ -94,7 +94,7 @@ const FormVidPin = () => {
         <div className="row justify-content-center">
           <div className="col-9 ">
             <div className="form-container ">
-              <h3>Please upload a video of your child brushing his/her teeth.</h3>
+              <h4>Please upload a video of your child brushing his/her teeth.</h4>
               <form onSubmit={handleSubmit}>
                 <div className="form-group ">
                   <label htmlFor="childName">Name of the Child:</label>

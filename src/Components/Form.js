@@ -91,7 +91,7 @@ const Form = ({ onSubmit, videoResponses }) => {
                 <div className="row justify-content-center">
                     <div className="col-9">
                         <div className="form-container">
-                            <h1>Please fill out the form with your child's information.</h1>
+                            <h4>Please fill out the form with your child's information.</h4>
                             <form onSubmit={handleSubmit}>
                                 <div className="form-group">
                                     <label htmlFor="childName">Name of the Child:</label>
