@@ -5,7 +5,6 @@ import '../cssfiles/style.css';
 const Home = () => {
   return (
     <div className="container-fluid home-container">
-      {/* Background overlay with gradient */}
       <div className="background-overlay"></div>
 
       <div className="row">
@@ -20,7 +19,6 @@ const Home = () => {
         </div>
       </div>
       
-      {/* Icon grid section */}
       <div className="icon-grid">
           <div className="row text-center">
             <div className="col-6 col-md-3 mb-4">

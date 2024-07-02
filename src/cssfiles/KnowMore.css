@@ -18,15 +18,15 @@ h1 {
   flex-direction: column;
   align-items: center;
   background-color: #CDE8E5;
-  padding: 1.25rem; /* changed from 20px to 1.25rem */
-  border-radius: 1rem; /* changed from 10px to 1rem */
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* changed from 2px 4px to 0.125rem 0.25rem */
+  padding: 1.25rem; 
+  border-radius: 1rem; 
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); 
   position: relative;
 }
 
 .video-container {
   width: 100%;
-  margin-bottom: 1.25rem; /* changed from 20px to 1.25rem */
+  margin-bottom: 1.25rem; 
   position: relative;
 }
 
@@ -52,29 +52,29 @@ h1 {
 }
 
 .arrow-left {
-  left: -4rem; /* changed from -40px to -4rem */
+  left: -4rem; 
 }
 
 .arrow-right {
-  right: -4rem; /* changed from -40px to -4rem */
+  right: -4rem; 
 }
 
 .note {
   background-color: #CDE8E5;
   color: #333;
-  padding: 1rem; /* changed from 10px to 1rem */
-  border-radius: 0.8rem; /* changed from 8px to 0.8rem */
-  margin-top: 1.25rem; /* changed from 20px to 1.25rem */
+  padding: 1rem; 
+  border-radius: 0.8rem;
+  margin-top: 1.25rem; 
   text-align: center;
   width: 75%;
   margin-left: auto;
   margin-right: auto;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* changed from 2px 4px to 0.125rem 0.25rem */
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); 
 }
 
 nav {
   background-color: #CDE8E5;
-  padding: 1rem; /* changed from 10px to 1rem */
+  padding: 1rem; 
   text-align: center;
 }
 
@@ -86,7 +86,7 @@ nav ul {
 
 nav li {
   display: inline-block;
-  margin: 0 1rem; /* changed from 10px to 1rem */
+  margin: 0 1rem; 
 }
 
 nav a {
@@ -96,6 +96,6 @@ nav a {
 
 .Checkbox {
   font-family: "Comic Sans MS", "Comic Sans", cursive;
-  font-size: 1.5rem; /* changed from 15px to 1.5rem */
+  font-size: 1rem; 
   font-weight: bold;
 }

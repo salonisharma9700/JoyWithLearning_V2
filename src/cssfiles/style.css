@@ -6,12 +6,12 @@ a {
   /* font-family: 'Merriweather Sans', sans-serif; */
   position: relative;
   @font-face {
-    font-family: 'OpenDyslexicBold'; /* Name to be used later */
+    font-family: 'OpenDyslexicBold'; 
     src: url('../open_dyslexic/open_dyslexic/OpenDyslexic-Bold.otf') format('opentype'); 
   }
 }
 @font-face {
-  font-family: 'OpenDyslexicBold'; /* Name to be used later */
+  font-family: 'OpenDyslexicBold';
   src: url('../open_dyslexic/open_dyslexic/OpenDyslexic-Bold.otf') format('opentype'); 
 }
 
@@ -84,6 +84,7 @@ body, html {
   position: absolute;
   top: 0;
   left: 0;
+  margin-bottom: 1rem;
   z-index: 1;
   background-size: cover;
   }
@@ -93,7 +94,7 @@ body, html {
 /* foot */
 .home-background-image {
   width: 100%;
-  height: auto;
+ 
   display: block;
 }
 
@@ -106,8 +107,8 @@ body, html {
   position: absolute;
   bottom: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.9); /* Optional: background to make icons more visible */
-  padding: 10px 0; /* Reduced padding to minimize space */
+  background: rgba(255, 255, 255, 0.9); 
+  padding: 1rem 0; 
 }
 
 .footer-link {
@@ -115,15 +116,14 @@ body, html {
 }
 
 .footer-icons {
-  width: 50px;
-  height: 50px;
-  margin-top: 5px; /* Adjust margin as needed */
-  
+  width: 3rem; 
+  height: 3rem;
+  margin-top: 0.5rem; 
 }
 
 .footer-link strong {
   display: block;
-  margin-bottom: 5px; /* Ensure consistent spacing between text and icons */
+  margin-bottom: 0.5rem; 
 }
 
 .footer-link {
@@ -131,7 +131,7 @@ body, html {
 }
 
 .footer-icons {
-  width: 50px;
-  height: 50px;
-  margin-top: 5px; /* Adjust margin as needed */
+  width: 3rem; 
+  height: 3rem; 
+  margin-top: 0.5rem; 
 }
