@@ -1,23 +1,20 @@
 import React from 'react';
-import '../cssfiles/style.css';
 import { Link } from 'react-router-dom';
+import '../cssfiles/style.css';
 
 const Home = () => {
   return (
-    
     <div className="container-fluid home-container">
       <div className="row">
-        <div className='ho' col-15 col-sm-3>
+        <div className="col-12">
           <Link to='/ytvid'>
-              <img src="home.png"  alt="Background" className="home-background-image" />
+            {window.innerWidth <= 768 ? (
+              <img src="phonehome.jpeg" alt="Background" className="home-background-image img-fluid" />
+            ) : (
+              <img src="homenew.jpeg" alt="Background" className="home-background-image img-fluid" />
+            )}
           </Link>
-        </div>  
-        {/* <div className="home-overlay-text" text-black fw-bold   >
-          <p>Supporting</p>
-          <p>Your Journey with</p>
-          <p>Autism and Dyslexia</p>
-        </div> */}
-        
+        </div>
       </div>
     </div>
   );
