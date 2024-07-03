@@ -186,3 +186,45 @@
 .submit-button:hover {
     background-color: #ff9ea9;
 }
+
+/* modal */
+
+.button {
+    background-color: #8dbdf0;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.button:hover {
+    background-color: #8dbdf0;
+}
+
+.modal-content {
+    border-radius: 8px;
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+.modal-header .close {
+    outline: none;
+}
+
+.modal-body {
+    font-family: 'Merriweather Sans', sans-serif;
+    text-align: center;
+}
+
+.modal-footer {
+    border-top: none;
+    justify-content: center;
+}
+
+.modal-footer .btn-secondary {
+    width: 100px;
+}
