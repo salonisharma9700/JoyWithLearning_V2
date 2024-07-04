@@ -92,7 +92,7 @@ body, html {
 
 
 /* foot */
-/* .home-background-image {
+.home-background-image {
   width: 100%;
   display: block;
 }
@@ -104,7 +104,7 @@ body, html {
 
 .icon-grid {
   position: absolute;
-  bottom: 7rem;
+  bottom: 3rem;
   left: 0;
   width: 100%;
   justify-content: space-evenly;
@@ -135,4 +135,4 @@ body, html {
   .icon-grid {
     padding: 0.5rem; 
   }
-} */
+}

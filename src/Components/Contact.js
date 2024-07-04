@@ -287,7 +287,7 @@ const Contact = ({ onSubmit }) => {
                 </div>
             </div>
 
-            {/* Modal */}
+           
             <div className={`modal fade ${showModal ? 'show' : ''}`} style={{ display: showModal ? 'block' : 'none' }}>
                 <div className="modal-dialog">
                     <div className="modal-content">
