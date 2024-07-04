@@ -107,6 +107,7 @@ body, html {
   bottom: 3rem;
   left: 0;
   width: 100%;
+  margin-top: 2rem;
   justify-content: space-evenly;
   background-color: rgba(255, 255, 255, 0.9); 
   padding: 1rem 0.5rem; 
@@ -121,9 +122,9 @@ body, html {
 }
 
 .footer-icons {
-  width: 3rem;
-  height: 3rem;
-  margin-top: 0.5rem; 
+  width: 5rem;
+  height: 5rem;
+  margin-top: 1rem; 
 }
 
 .footer-link strong {
@@ -134,5 +135,6 @@ body, html {
 @media (min-width: 769px) {
   .icon-grid {
     padding: 0.5rem; 
+    
   }
 }
