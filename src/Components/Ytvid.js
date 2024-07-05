@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Form from './Form';
 import '../cssfiles/play.css';
-import ThankYouModal from './ThankYouModal'; // Assuming ThankYouModal component is correctly implemented
+import ThankYouModal from './ThankYouModal'; 
 import emailjs from 'emailjs-com';
 
 const videoUrls = [
@@ -13,13 +13,14 @@ const videoUrls = [
     'FgJr_L9ALm4',
 ];
 
+const apiUrl = process.env.REACT_APP_API_URL;
 const Ytvid = () => {
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const [isCheckedYes, setIsCheckedYes] = useState(false);
     const [isCheckedNo, setIsCheckedNo] = useState(false);
     const [videoResponses, setVideoResponses] = useState([]);
     const [showForm, setShowForm] = useState(false);
-    const [showThankYouModal, setShowThankYouModal] = useState(false); // State for controlling ThankYouModal
+    const [showThankYouModal, setShowThankYouModal] = useState(false);
     const navigate = useNavigate();
 
     const onVideoEnd = () => {
@@ -55,22 +56,21 @@ const Ytvid = () => {
     const handleSubmit = async (formData, file) => {
         const combinedData = {
             ...formData,
-            videoResponses: videoResponses // Assuming videoResponses is correctly defined
+            videoResponses: videoResponses 
         };
     
         const formDataObject = new FormData();
-        formDataObject.append('file', file); // Assuming 'file' is the name of your file field
+        formDataObject.append('file', file); 
         formDataObject.append('formData', JSON.stringify(combinedData));
     
         try {
-            const response = await axios.post('http://localhost:5000/api/submitFormData', formDataObject, {
+            const response = await axios.post(`${apiUrl}/api/submitFormData`, formDataObject, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
     
             console.log('Form data submitted successfully:', response.data);
-            // Handle success actions here (e.g., show thank you modal)
         } catch (error) {
             console.error('Error submitting form data:', error);
             if (error.response) {
@@ -82,7 +82,6 @@ const Ytvid = () => {
             } else {
                 console.error('Error setting up the request:', error.message);
             }
-            // Handle error actions here
         }
     };
     
@@ -100,7 +99,7 @@ const Ytvid = () => {
         const data = { videoId, response };
         console.log("Saving response to backend:", data);
 
-        axios.post('http://localhost:5000/api/saveVideoResponse', data)
+        axios.post(`${apiUrl}/api/saveVideoResponse`, data)
             .then(response => {
                 console.log('Video response saved:', response.data);
             })
@@ -121,7 +120,7 @@ const Ytvid = () => {
 
     const closeThankYouModal = () => {
         setShowThankYouModal(false);
-        navigate('/'); // Redirect to the home page
+        navigate('/'); 
     };
 
     return (

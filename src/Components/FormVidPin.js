@@ -340,6 +340,9 @@ import ThankYouModal from './ThankYouModal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import emailjs from 'emailjs-com';
 
+
+const apiUrl = process.env.REACT_APP_API_URL;
+
 const FormVidPin = () => {
   const [formData, setFormData] = useState({
     childName: '',
@@ -464,17 +467,16 @@ const FormVidPin = () => {
     });
 
     if (formValid && file) {
-      // Request OTP generation
       try {
         const videoValid = await handleComprehensiveCheck();
         if (videoValid) {
         const videoValid = await handleComprehensiveCheck();
         console.log('Sending request with phoneNumber:', formData.primaryContact);
-        const response = await axios.post('http://localhost:5000/api/generate-otp', { phoneNumber: formData.primaryContact });
+        const response = await axios.post(`${apiUrl}/api/generate-otp`, { phoneNumber: formData.primaryContact });
         console.log('Response from server:', response);
 
-        setGeneratedOtp(response.data.otp); // Store the OTP sent by the backend
-        setOtpModalVisible(true); // Show the OTP modal
+        setGeneratedOtp(response.data.otp); 
+        setOtpModalVisible(true); 
         // setShowVerifyOTP(true);
         }
       } catch (error) {
@@ -489,12 +491,11 @@ const FormVidPin = () => {
   
   const handleOtpVerification = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/verify-otp', {
+      const response = await axios.post(`${apiUrl}/api/verify-otp`, {
         otp: otp,
         phoneNumber: formData.primaryContact,
       });
       if (response.data.success) {
-        // OTP verification successful, proceed with form submission
         const formDataToSubmit = new FormData();
         for (const key in formData) {
           formDataToSubmit.append(key, formData[key]);
@@ -502,9 +503,9 @@ const FormVidPin = () => {
         formDataToSubmit.append('video', file);
 
         try {
-          const mediaResponse = await axios.post('http://localhost:5000/api/media', formDataToSubmit);
+          const mediaResponse = await axios.post(`${apiUrl}/api/media`, formDataToSubmit);
           console.log('Success:', mediaResponse.data);
-          setOtpModalVisible(false); // Hide the OTP modal after successful submission
+          setOtpModalVisible(false); 
           handleSubmitToDatabase();
         } catch (error) {
           console.error('Error:', error.message);
@@ -519,13 +520,10 @@ const FormVidPin = () => {
 
   const handleSubmitToDatabase = async () => {
     try {
-      // Handle the form data submission to the database here
       const formDataToSubmit = { ...formData };
       
-      // Show ThankYouModal after successful submission
       setShowThankYouModal(true);
   
-      // Send email using EmailJS after successful form submission
       const emailParams = {
         childName: formData.childName,
         age: formData.age,
@@ -540,18 +538,15 @@ const FormVidPin = () => {
         primaryContact: formData.primaryContact,
       };
   
-      // Replace with your EmailJS service ID, template ID, and user ID
       const serviceId = 'service_v1786bs';
       const templateId = 'template_cavtrlg';
       const userId = '3NQW95XFCjHuG4uZl';
   
-      // Send email using EmailJS
       await emailjs.send(serviceId, templateId, emailParams, userId);
   
       console.log('Email sent successfully!');
     } catch (error) {
       console.error('Error sending email:', error);
-      // Handle error here (e.g., show error message to user)
     }
   };
   

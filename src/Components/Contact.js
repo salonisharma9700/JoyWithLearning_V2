@@ -393,7 +393,6 @@ const Contact = () => {
             message: '',
         });
         setErrors({});
-        // Simulate redirection to home page after closing modal
         window.location.href = '/';
     };
 
