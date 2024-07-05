@@ -15,6 +15,7 @@ import FormVidPin from './Components/FormVidPin';
 import IconFooter from './Components/IconFooter';
 import IconGrid from './Components/IconGrid';
 import Footer from './Components/Footer';
+import ThankYouModal from './Components/ThankYouModal';
 
 const App = () => {
   const location = useLocation();
@@ -44,6 +45,7 @@ const App = () => {
         <Route path="/form" element={<Form />} />
         <Route path="/upvid" element={<FormVidPin />} />
         <Route path="/iconsfoot" element={<IconFooter />} />
+        <Route path="/thankyou" element={<ThankYouModal/>}/>
       </Routes>
       {location.pathname === '/' && (isSmallScreen ? <IconGrid /> : <IconFooter />)}
       <Footer />

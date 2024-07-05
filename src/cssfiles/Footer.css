@@ -202,6 +202,7 @@
 .faq-container h1 {
   text-align: center;
   margin-bottom: 1.25rem;
+  font-size: 1.5rem;
 }
 
 .faq-list {
@@ -246,6 +247,7 @@
 .about-container h1 {
   text-align: center;
   margin-bottom: 1.25rem;
+  font-size: 1.5rem;
 }
 
 .about-content {
@@ -254,6 +256,7 @@
 
 .about-content h2 {
   margin-top: 1.25rem;
+  font-size: 1rem;
 }
 
 .about-content ul {
@@ -272,7 +275,7 @@
   }
 
   .about-container h1 {
-    font-size: 1.5rem; 
+    font-size: 1rem; 
     margin-bottom: 0.9375rem; 
   }
 
@@ -281,7 +284,7 @@
   }
 
   .about-content h2 {
-    font-size: 1.25rem;
+    font-size: 1rem;
     margin-top: 0.9375rem; 
   }
 

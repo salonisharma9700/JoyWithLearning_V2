@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Form from './Form';
 import '../cssfiles/play.css';
+import ThankYouModal from './ThankYouModal'; // Assuming ThankYouModal component is correctly implemented
+import emailjs from 'emailjs-com';
 
 const videoUrls = [
     'ciyvRFyt4as',
@@ -17,6 +19,7 @@ const Ytvid = () => {
     const [isCheckedNo, setIsCheckedNo] = useState(false);
     const [videoResponses, setVideoResponses] = useState([]);
     const [showForm, setShowForm] = useState(false);
+    const [showThankYouModal, setShowThankYouModal] = useState(false); // State for controlling ThankYouModal
     const navigate = useNavigate();
 
     const onVideoEnd = () => {
@@ -50,23 +53,47 @@ const Ytvid = () => {
     };
 
     const handleSubmit = async (formData, file) => {
-        const combinedData = { ...formData, videoResponses };
-        console.log("Submitting combined data: ", combinedData);
-
+        const combinedData = {
+            ...formData,
+            videoResponses: videoResponses // Assuming videoResponses is correctly defined
+        };
+    
         const formDataObject = new FormData();
-        formDataObject.append('file', file);
+        formDataObject.append('file', file); // Assuming 'file' is the name of your file field
         formDataObject.append('formData', JSON.stringify(combinedData));
-
+    
         try {
             const response = await axios.post('http://localhost:5000/api/submitFormData', formDataObject, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
+    
             console.log('Form data submitted successfully:', response.data);
+            // Handle success actions here (e.g., show thank you modal)
         } catch (error) {
             console.error('Error submitting form data:', error);
+            if (error.response) {
+                console.error('Server responded with:', error.response.data);
+                console.error('Status:', error.response.status);
+                console.error('Headers:', error.response.headers);
+            } else if (error.request) {
+                console.error('No response received:', error.request);
+            } else {
+                console.error('Error setting up the request:', error.message);
+            }
+            // Handle error actions here
         }
+    };
+    
+
+    const sendEmail = (data) => {
+        emailjs.send('service_v1786bs', 'template_cavtrlg', data, '3NQW95XFCjHuG4uZl')
+            .then((response) => {
+                console.log('Email sent successfully:', response.status, response.text);
+            }, (error) => {
+                console.error('Failed to send email:', error);
+            });
     };
 
     const saveResponseToBackend = (videoId, response) => {
@@ -91,53 +118,58 @@ const Ytvid = () => {
             return { width: '900', height: '500' }; 
         }
     };
-    
+
+    const closeThankYouModal = () => {
+        setShowThankYouModal(false);
+        navigate('/'); // Redirect to the home page
+    };
 
     return (
         <div className='ytvid'>
-        <div className='row'>
-        <div className='video1'>
-            {!showForm ? (
-                <>
-                    <YouTube
-                        videoId={videoUrls[currentVideoIndex]}
-                        opts={getPlayerOpts()}
-                        onEnd={onVideoEnd}
-                    />
-                    <div className='checkbox'>
-                        <h4>My child is exhibiting behaviour as shown in the video</h4>
-                        <div>
-                            <input
-                                type="checkbox"
-                                id="yes"
-                                checked={isCheckedYes}
-                                onChange={handleCheckYes}
+            <div className='row'>
+                <div className='video1'>
+                    {!showForm ? (
+                        <>
+                            <YouTube
+                                videoId={videoUrls[currentVideoIndex]}
+                                opts={getPlayerOpts()}
+                                onEnd={onVideoEnd}
                             />
-                            <label htmlFor="yes">Yes</label>
-                        </div>
-                        <div>
-                            <input
-                                type="checkbox"
-                                id="no"
-                                checked={isCheckedNo}
-                                onChange={handleCheckNo}
-                            />
-                            <label htmlFor="no">No</label>
-                        </div>
-                    </div>
-                    <div  col-sm-3>
-                    {(isCheckedYes || isCheckedNo) && (
-                        <button onClick={handleNextVideo} className='next-button'>
-                            {currentVideoIndex < videoUrls.length - 1 ? 'Next Video' : 'Submit'}
-                        </button>
+                            <div className='checkbox'>
+                                <h4>My child is exhibiting behaviour as shown in the video</h4>
+                                <div>
+                                    <input
+                                        type="checkbox"
+                                        id="yes"
+                                        checked={isCheckedYes}
+                                        onChange={handleCheckYes}
+                                    />
+                                    <label htmlFor="yes">Yes</label>
+                                </div>
+                                <div>
+                                    <input
+                                        type="checkbox"
+                                        id="no"
+                                        checked={isCheckedNo}
+                                        onChange={handleCheckNo}
+                                    />
+                                    <label htmlFor="no">No</label>
+                                </div>
+                            </div>
+                            <div className="col-sm-3">
+                                {(isCheckedYes || isCheckedNo) && (
+                                    <button onClick={handleNextVideo} className='next-button'>
+                                        {currentVideoIndex < videoUrls.length - 1 ? 'Next Video' : 'Submit'}
+                                    </button>
+                                )}
+                            </div>
+                        </>
+                    ) : (
+                        <Form onSubmit={handleSubmit} videoResponses={videoResponses} />
                     )}
-                    </div>
-                </>
-            ) : (
-                <Form onSubmit={handleSubmit} videoResponses={videoResponses} />
-            )}
-        </div>
-        </div>
+                </div>
+            </div>
+            <ThankYouModal show={showThankYouModal} onClose={closeThankYouModal} />
         </div>
     );
 };
