@@ -240,10 +240,61 @@ const Ytvid = () => {
     };
 
 
-    const handleSubmit = async (formData, file) => {
+    // const handleSubmit = async (formData, file) => {
+    //     const combinedData = {
+    //         ...formData,
+    //         videoResponses: videoResponses 
+    //     };
+    
+    //     const formDataObject = new FormData();
+    //     formDataObject.append('file', file);
+    //     formDataObject.append('formData', JSON.stringify(combinedData));
+    
+    //     try {
+    //         const response = await axios.post("https://backend-jwl-gamma.vercel.app/api/submitFormData", formDataObject, {
+    //             headers: {
+    //                 'Content-Type': 'multipart/form-data'
+    //             }
+    //         });
+    
+    //         console.log('Form data submitted successfully:', response.data);
+    //         setShowForm(false);
+    //         setShowThankYouModal(true);
+    //         sendEmail(formData); // Optionally send an email after successful form submission
+    //     } catch (error) {
+    //         console.error('Error submitting form data:', error);
+    //         if (error.response) {
+    //             console.error('Server responded with:', error.response.data);
+    //             console.error('Status:', error.response.status);
+    //             console.error('Headers:', error.response.headers);
+    //         } else if (error.request) {
+    //             console.error('No response received:', error.request);
+    //         } else {
+    //             console.error('Error setting up the request:', error.message);
+    //         }
+    //     }
+    // };
+
+
+    const sendEmail = (data) => {
+        emailjs.send('service_v1786bs', 'template_cavtrlg', data, '3NQW95XFCjHuG4uZl')
+            .then((response) => {
+                console.log('Email sent successfully:', response.status, response.text);
+            }, (error) => {
+                console.error('Failed to send email:', error);
+            });
+    };
+
+
+    const saveResponseToBackend = async (formData, file) => {
+        if (file && file.size > 50 * 1024 * 1024) { // Check if file size is greater than 50MB
+            console.error('File size exceeds the 50MB limit.');
+            return;
+        }
+    
         const combinedData = {
             ...formData,
-            videoResponses: videoResponses 
+            videoResponses: videoResponses
         };
     
         const formDataObject = new FormData();
@@ -261,6 +312,9 @@ const Ytvid = () => {
             setShowForm(false);
             setShowThankYouModal(true);
             sendEmail(formData); // Optionally send an email after successful form submission
+    
+            // Save response to backend
+            saveVideoResponse(response.data.videoId, formData.videoResponse);
         } catch (error) {
             console.error('Error submitting form data:', error);
             if (error.response) {
@@ -274,32 +328,20 @@ const Ytvid = () => {
             }
         }
     };
-
-
-    const sendEmail = (data) => {
-        emailjs.send('service_v1786bs', 'template_cavtrlg', data, '3NQW95XFCjHuG4uZl')
-            .then((response) => {
-                console.log('Email sent successfully:', response.status, response.text);
-            }, (error) => {
-                console.error('Failed to send email:', error);
+    
+    const saveVideoResponse = (videoId, response) => {
+        const data = { videoId, response };
+        console.log("Saving response to backend:", data);
+    
+        axios.post("https://backend-jwl-gamma.vercel.app/api/saveVideoResponse", data)
+            .then(response => {
+                console.log('Video response saved:', response.data);
+            })
+            .catch(error => {
+                console.error('Error saving video response:', error);
             });
     };
-
-
-    // const saveResponseToBackend = (videoId, response) => {
-    //     const data = { videoId, response };
-    //     console.log("Saving response to backend:", data);
-
-
-    //     axios.post("https://backend-jwl-gamma.vercel.app/api/saveVideoResponse", data)
-    //         .then(response => {
-    //             console.log('Video response saved:', response.data);
-    //         })
-    //         .catch(error => {
-    //             console.error('Error saving video response:', error);
-    //         });
-    // };
-
+    
 
     const getPlayerOpts = () => {
         if (window.innerWidth <= 480) {
